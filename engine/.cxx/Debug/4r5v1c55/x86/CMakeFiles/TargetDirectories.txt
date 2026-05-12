@@ -1,3 +1,0 @@
-/app/engine/.cxx/Debug/4r5v1c55/x86/CMakeFiles/stockfish_bridge.dir
-/app/engine/.cxx/Debug/4r5v1c55/x86/CMakeFiles/edit_cache.dir
-/app/engine/.cxx/Debug/4r5v1c55/x86/CMakeFiles/rebuild_cache.dir

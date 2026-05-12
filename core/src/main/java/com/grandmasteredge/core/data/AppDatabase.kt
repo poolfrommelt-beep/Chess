@@ -1,4 +1,4 @@
-package com.grandmasteredge.app.data
+package com.grandmasteredge.core.data
 
 import androidx.room.*
 

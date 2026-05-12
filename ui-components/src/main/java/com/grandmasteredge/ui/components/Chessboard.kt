@@ -143,9 +143,32 @@ fun PieceIcon(piece: Piece, modifier: Modifier = Modifier) {
                 drawLine(color = outlineColor, start = Offset(size.width/2, size.height/4), end = Offset(size.width/2, size.height*0.75f), strokeWidth = 2.dp.toPx())
                 drawLine(color = outlineColor, start = Offset(size.width/4, size.height/2), end = Offset(size.width*0.75f, size.height/2), strokeWidth = 2.dp.toPx())
             }
-            else -> {
-                // Generic shape for other pieces
-                drawCircle(color = color, radius = size.minDimension / 3)
+            com.grandmasteredge.core.model.PieceType.ROOK -> {
+                drawRect(color = color, topLeft = Offset(size.width/4, size.height/3), size = Size(size.width/2, size.height/2))
+                drawRect(color = color, topLeft = Offset(size.width/4, size.height/4), size = Size(size.width/8, size.height/8))
+                drawRect(color = color, topLeft = Offset(size.width*0.4375f, size.height/4), size = Size(size.width/8, size.height/8))
+                drawRect(color = color, topLeft = Offset(size.width*0.625f, size.height/4), size = Size(size.width/8, size.height/8))
+            }
+            com.grandmasteredge.core.model.PieceType.QUEEN -> {
+                drawCircle(color = color, radius = size.minDimension / 3, center = Offset(size.width/2, size.height*0.6f))
+                drawRect(color = color, topLeft = Offset(size.width*0.4f, size.height/4), size = Size(size.width/5, size.height/5))
+                drawCircle(color = color, radius = size.minDimension / 8, center = Offset(size.width/2, size.height/4))
+            }
+            com.grandmasteredge.core.model.PieceType.BISHOP -> {
+                drawCircle(color = color, radius = size.minDimension / 4, center = Offset(size.width/2, size.height*0.4f))
+                drawLine(color = outlineColor, start = Offset(size.width/2, size.height*0.25f), end = Offset(size.width/2, size.height*0.55f), strokeWidth = 2.dp.toPx())
+                drawRect(color = color, topLeft = Offset(size.width/3, size.height/2), size = Size(size.width/3, size.height/4))
+            }
+            com.grandmasteredge.core.model.PieceType.KNIGHT -> {
+                val path = androidx.compose.ui.graphics.Path().apply {
+                    moveTo(size.width * 0.3f, size.height * 0.8f)
+                    lineTo(size.width * 0.7f, size.height * 0.8f)
+                    lineTo(size.width * 0.7f, size.height * 0.5f)
+                    lineTo(size.width * 0.4f, size.height * 0.2f)
+                    lineTo(size.width * 0.2f, size.height * 0.4f)
+                    close()
+                }
+                drawPath(path = path, color = color)
             }
         }
         // Draw outline
