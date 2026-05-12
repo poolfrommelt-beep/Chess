@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":feature-tactics"))
     implementation(project(":feature-multiplayer"))
     implementation(project(":feature-kids"))
+    implementation(project(":feature-singleplayer"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
