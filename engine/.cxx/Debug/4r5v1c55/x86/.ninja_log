@@ -1,0 +1,6 @@
+# ninja log v5
+0	609	1778512441858822616	CMakeFiles/stockfish_bridge.dir/stockfish_bridge.cpp.o	fdbaab59ef39e63f
+609	679	1778512441922822615	/app/engine/build/intermediates/cxx/Debug/4r5v1c55/obj/x86/libstockfish_bridge.so	ff94f120c602199a
+0	4	0	clean	2d2f43cf2094d251
+2	564	1778521600847872687	CMakeFiles/stockfish_bridge.dir/stockfish_bridge.cpp.o	fdbaab59ef39e63f
+565	999	1778521601279872683	/app/engine/build/intermediates/cxx/Debug/4r5v1c55/obj/x86/libstockfish_bridge.so	ff94f120c602199a

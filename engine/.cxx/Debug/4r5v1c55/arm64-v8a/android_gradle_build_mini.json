@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/app/engine/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/opt/android-sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/app/engine/.cxx/Debug/4r5v1c55/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/opt/android-sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/app/engine/.cxx/Debug/4r5v1c55/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "stockfish_bridge::@6890427a1f51a3e7e1df": {
+      "artifactName": "stockfish_bridge",
+      "abi": "arm64-v8a",
+      "output": "/app/engine/build/intermediates/cxx/Debug/4r5v1c55/obj/arm64-v8a/libstockfish_bridge.so",
+      "runtimeFiles": []
+    }
+  }
+}

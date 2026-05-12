@@ -1,0 +1,13 @@
+.gradle
+build
+/*/build
+.cxx
+*.iml
+.idea
+local.properties
+.DS_Store
+capture_output.log
+build_output.log
+test_output.log
+*.apk
+*.aar

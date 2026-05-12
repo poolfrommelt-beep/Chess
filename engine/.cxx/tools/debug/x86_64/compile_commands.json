@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/app/engine/.cxx/Debug/4r5v1c55/x86_64",
+  "command": "/opt/android-sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android24 --sysroot=/opt/android-sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dstockfish_bridge_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -o CMakeFiles/stockfish_bridge.dir/stockfish_bridge.cpp.o -c /app/engine/src/main/cpp/stockfish_bridge.cpp",
+  "file": "/app/engine/src/main/cpp/stockfish_bridge.cpp"
+}
+]
