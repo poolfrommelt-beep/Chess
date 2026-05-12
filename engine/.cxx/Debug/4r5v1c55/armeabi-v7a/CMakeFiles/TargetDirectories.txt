@@ -1,3 +1,0 @@
-/app/engine/.cxx/Debug/4r5v1c55/armeabi-v7a/CMakeFiles/stockfish_bridge.dir
-/app/engine/.cxx/Debug/4r5v1c55/armeabi-v7a/CMakeFiles/edit_cache.dir
-/app/engine/.cxx/Debug/4r5v1c55/armeabi-v7a/CMakeFiles/rebuild_cache.dir
