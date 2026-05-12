@@ -8,12 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.grandmasteredge.multiplayer.viewmodel.MultiplayerViewModel
 import com.grandmasteredge.ui.components.Chessboard
 
 @Composable
 fun MultiplayerScreen(
-    viewModel: MultiplayerViewModel = MultiplayerViewModel()
+    viewModel: MultiplayerViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

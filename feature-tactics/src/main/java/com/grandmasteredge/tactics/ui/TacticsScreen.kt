@@ -9,13 +9,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.grandmasteredge.tactics.viewmodel.TacticsViewModel
 import com.grandmasteredge.ui.components.Chessboard
 import com.grandmasteredge.ui.components.EvaluationBar
 
 @Composable
 fun TacticsScreen(
-    viewModel: TacticsViewModel = TacticsViewModel()
+    viewModel: TacticsViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

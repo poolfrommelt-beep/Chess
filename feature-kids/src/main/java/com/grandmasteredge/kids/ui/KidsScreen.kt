@@ -11,12 +11,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.grandmasteredge.kids.viewmodel.KidsViewModel
 import com.grandmasteredge.ui.components.Chessboard
 
 @Composable
 fun KidsScreen(
-    viewModel: KidsViewModel = KidsViewModel()
+    viewModel: KidsViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
