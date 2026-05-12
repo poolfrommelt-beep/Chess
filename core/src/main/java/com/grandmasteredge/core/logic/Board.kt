@@ -2,7 +2,7 @@ package com.grandmasteredge.core.logic
 
 import com.grandmasteredge.core.model.*
 
-class Board(
+data class Board(
     val pieces: Map<Square, Piece> = emptyMap()
 ) {
     fun getPiece(square: Square): Piece? = pieces[square]

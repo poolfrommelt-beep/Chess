@@ -81,8 +81,8 @@ fun Chessboard(
                                             dragOffset += dragAmount
                                         },
                                         onDragEnd = {
-                                            val targetFile = (file + dragOffset.x / squareSize.toPx()).toInt().coerceIn(0, 7)
-                                            val targetRank = (rank - dragOffset.y / squareSize.toPx()).toInt().coerceIn(0, 7)
+                                            val targetFile = (file + (dragOffset.x / squareSize.toPx() + if (dragOffset.x > 0) 0.5f else -0.5f)).toInt().coerceIn(0, 7)
+                                            val targetRank = (rank - (dragOffset.y / squareSize.toPx() + if (dragOffset.y > 0) 0.5f else -0.5f)).toInt().coerceIn(0, 7)
                                             val targetSquare = Square(targetFile, targetRank)
                                             if (targetSquare != square) {
                                                 onMove(Move(square, targetSquare))
@@ -129,49 +129,50 @@ fun Chessboard(
 
 @Composable
 fun PieceIcon(piece: Piece, modifier: Modifier = Modifier) {
-    Canvas(modifier = modifier.padding(8.dp)) {
-        val color = if (piece.color == com.grandmasteredge.core.model.Color.WHITE) ComposeColor.White else ComposeColor.Black
-        val outlineColor = if (piece.color == com.grandmasteredge.core.model.Color.WHITE) ComposeColor.Black else ComposeColor.White
+    val textMeasurer = rememberTextMeasurer()
+    val symbol = when (piece.type) {
+        com.grandmasteredge.core.model.PieceType.KING -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♔" else "♚"
+        com.grandmasteredge.core.model.PieceType.QUEEN -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♕" else "♛"
+        com.grandmasteredge.core.model.PieceType.ROOK -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♖" else "♜"
+        com.grandmasteredge.core.model.PieceType.BISHOP -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♗" else "♝"
+        com.grandmasteredge.core.model.PieceType.KNIGHT -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♘" else "♞"
+        com.grandmasteredge.core.model.PieceType.PAWN -> if (piece.color == com.grandmasteredge.core.model.Color.WHITE) "♙" else "♟"
+    }
 
-        when (piece.type) {
-            com.grandmasteredge.core.model.PieceType.PAWN -> {
-                drawCircle(color = color, radius = size.minDimension / 4, center = Offset(size.width/2, size.height/3))
-                drawRect(color = color, topLeft = Offset(size.width/3, size.height/2), size = Size(size.width/3, size.height/3))
-            }
-            com.grandmasteredge.core.model.PieceType.KING -> {
-                drawRect(color = color, topLeft = Offset(size.width/4, size.height/4), size = Size(size.width/2, size.height/2))
-                drawLine(color = outlineColor, start = Offset(size.width/2, size.height/4), end = Offset(size.width/2, size.height*0.75f), strokeWidth = 2.dp.toPx())
-                drawLine(color = outlineColor, start = Offset(size.width/4, size.height/2), end = Offset(size.width*0.75f, size.height/2), strokeWidth = 2.dp.toPx())
-            }
-            com.grandmasteredge.core.model.PieceType.ROOK -> {
-                drawRect(color = color, topLeft = Offset(size.width/4, size.height/3), size = Size(size.width/2, size.height/2))
-                drawRect(color = color, topLeft = Offset(size.width/4, size.height/4), size = Size(size.width/8, size.height/8))
-                drawRect(color = color, topLeft = Offset(size.width*0.4375f, size.height/4), size = Size(size.width/8, size.height/8))
-                drawRect(color = color, topLeft = Offset(size.width*0.625f, size.height/4), size = Size(size.width/8, size.height/8))
-            }
-            com.grandmasteredge.core.model.PieceType.QUEEN -> {
-                drawCircle(color = color, radius = size.minDimension / 3, center = Offset(size.width/2, size.height*0.6f))
-                drawRect(color = color, topLeft = Offset(size.width*0.4f, size.height/4), size = Size(size.width/5, size.height/5))
-                drawCircle(color = color, radius = size.minDimension / 8, center = Offset(size.width/2, size.height/4))
-            }
-            com.grandmasteredge.core.model.PieceType.BISHOP -> {
-                drawCircle(color = color, radius = size.minDimension / 4, center = Offset(size.width/2, size.height*0.4f))
-                drawLine(color = outlineColor, start = Offset(size.width/2, size.height*0.25f), end = Offset(size.width/2, size.height*0.55f), strokeWidth = 2.dp.toPx())
-                drawRect(color = color, topLeft = Offset(size.width/3, size.height/2), size = Size(size.width/3, size.height/4))
-            }
-            com.grandmasteredge.core.model.PieceType.KNIGHT -> {
-                val path = androidx.compose.ui.graphics.Path().apply {
-                    moveTo(size.width * 0.3f, size.height * 0.8f)
-                    lineTo(size.width * 0.7f, size.height * 0.8f)
-                    lineTo(size.width * 0.7f, size.height * 0.5f)
-                    lineTo(size.width * 0.4f, size.height * 0.2f)
-                    lineTo(size.width * 0.2f, size.height * 0.4f)
-                    close()
-                }
-                drawPath(path = path, color = color)
-            }
+    Canvas(modifier = modifier.padding(4.dp)) {
+        val fontSize = size.minDimension.toSp() * 0.8f
+        val textLayoutResult = textMeasurer.measure(
+            text = symbol,
+            style = TextStyle(
+                fontSize = fontSize,
+                color = if (piece.color == com.grandmasteredge.core.model.Color.WHITE) ComposeColor.White else ComposeColor.Black
+            )
+        )
+
+        // Draw a subtle shadow/outline for white pieces on light squares
+        if (piece.color == com.grandmasteredge.core.model.Color.WHITE) {
+            drawText(
+                textMeasurer = textMeasurer,
+                text = symbol,
+                topLeft = Offset(
+                    (size.width - textLayoutResult.size.width) / 2 + 1.dp.toPx(),
+                    (size.height - textLayoutResult.size.height) / 2 + 1.dp.toPx()
+                ),
+                style = TextStyle(fontSize = fontSize, color = ComposeColor.Black.copy(alpha = 0.5f))
+            )
         }
-        // Draw outline
-        drawCircle(color = outlineColor, radius = size.minDimension / 3, style = Stroke(width = 1.dp.toPx()))
+
+        drawText(
+            textMeasurer = textMeasurer,
+            text = symbol,
+            topLeft = Offset(
+                (size.width - textLayoutResult.size.width) / 2,
+                (size.height - textLayoutResult.size.height) / 2
+            ),
+            style = TextStyle(
+                fontSize = fontSize,
+                color = if (piece.color == com.grandmasteredge.core.model.Color.WHITE) ComposeColor.White else ComposeColor.Black
+            )
+        )
     }
 }

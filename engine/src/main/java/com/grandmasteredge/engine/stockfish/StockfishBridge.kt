@@ -2,7 +2,11 @@ package com.grandmasteredge.engine.stockfish
 
 class StockfishBridge {
     init {
-        System.loadLibrary("stockfish_bridge")
+        try {
+            System.loadLibrary("stockfish_bridge")
+        } catch (e: UnsatisfiedLinkError) {
+            // Expected in unit tests on JVM
+        }
     }
 
     external fun stringFromJNI(): String

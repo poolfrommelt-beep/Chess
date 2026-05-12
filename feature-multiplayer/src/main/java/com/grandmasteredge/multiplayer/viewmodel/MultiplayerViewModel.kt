@@ -21,6 +21,14 @@ class MultiplayerViewModel : ViewModel() {
 
     fun onMove(move: Move) {
         val currentState = _uiState.value
+        val piece = currentState.gameState.board.getPiece(move.from)
+
+        // Turn enforcement: only allow moving the piece of the current turn's color
+        if (piece?.color != currentState.gameState.turn) {
+            _uiState.update { it.copy(feedback = "Not your turn! ${currentState.gameState.turn.name.lowercase().replaceFirstChar { c -> c.uppercase() }} to move") }
+            return
+        }
+
         val nextBoard = currentState.gameState.board.movePiece(move)
 
         if (nextBoard != currentState.gameState.board) {
